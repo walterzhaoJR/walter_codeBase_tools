@@ -1,0 +1,1 @@
+/usr/bin/c++    -o0 -Wall -g -ggdb    CMakeFiles/main.dir/main.cpp.o  -o main -rdynamic math/libMathFunctions.a 

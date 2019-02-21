@@ -1,0 +1,2 @@
+/data/walterzhao/learn/cmake/5_gdb_version/math/CMakeFiles/MathFunctions.dir
+/data/walterzhao/learn/cmake/5_gdb_version/CMakeFiles/main.dir

@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/pow_function.dir/main.cpp.o  -o pow_function -rdynamic 
