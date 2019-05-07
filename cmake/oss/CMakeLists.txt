@@ -11,6 +11,7 @@ include_directories(./
                     ./proxy
                     ./rapidjson
                     ./load_balance
+		            ./kms
                     ${COMM}
                     ${BASEERROR_PATH}                 
                     ${NEW_MYSQL_PATH}                   
@@ -68,6 +69,7 @@ add_subdirectory(frame)
 add_subdirectory(spark)
 add_subdirectory(proxy)
 add_subdirectory(load_balance)
+add_subdirectory(kms)
 
 aux_source_directory(. SRC_DIR)
 add_executable(${PROJECT_NAME} ${SRC_DIR})
@@ -81,10 +83,8 @@ target_link_libraries(${PROJECT_NAME} ${LIB_MPCOMM_PATH})
 find_library(LIB_PNG_PATH pngclient ${PNG_LIB})
 target_link_libraries(${PROJECT_NAME} ${LIB_PNG_PATH})
 
-
 find_library(LIB_ZOOKEEPER_PATH zookeeper_mt ${ZOOKEEPER_LIB})
 target_link_libraries(${PROJECT_NAME} ${LIB_ZOOKEEPER_PATH})
-
 
 find_library(LIB_ZKWATCH_PAYH commzookeeper ${ZKWATCH_LIB})
 target_link_libraries(${PROJECT_NAME} ${LIB_ZKWATCH_PAYH})
@@ -99,12 +99,15 @@ find_library(LIB_EVENT_PATH event ${LIBEVENT_LIB})
 target_link_libraries(${PROJECT_NAME} ${LIB_EVENT_PATH})
 
 find_library(LIB_SSL_PATH ssl ${SSL_LIB})
+message(${LIB_SSL_PATH})
 target_link_libraries(${PROJECT_NAME} ${LIB_SSL_PATH})
 
 find_library(LIB_SSL_CRYPTO_PATH crypto ${SSL_LIB})
+message(${LIB_SSL_CRYPTO_PATH})
 target_link_libraries(${PROJECT_NAME} ${LIB_SSL_CRYPTO_PATH})
 
 find_library(LIB_MYSQL_CLIENT_PATH mysqlclient ${MYSQL_LIB})
+message(${LIB_MYSQL_CLIENT_PATH})
 target_link_libraries(${PROJECT_NAME} ${LIB_MYSQL_CLIENT_PATH})
 
 find_library(LIB_DNS_PATH dnscli ${DNS_LIB})
@@ -122,7 +125,6 @@ target_link_libraries(${PROJECT_NAME} ${CURL_LIB})
 find_library(NETAPI_LIB netapi ${PUBLICLIB}/netapi)
 target_link_libraries(${PROJECT_NAME} ${NETAPI_LIB})
 
-
 find_library(PROTOBUF_LIB protobuf ${PUBLICLIB}/protobuf/protobuf-2.4.1_tlinux_64/prefix/lib)
 target_link_libraries(${PROJECT_NAME} ${PROTOBUF_LIB})
 
@@ -134,9 +136,12 @@ target_link_libraries(${PROJECT_NAME} dl)
 
 target_link_libraries(${PROJECT_NAME} rt)
 
+target_link_libraries(${PROJECT_NAME} z)
+
 target_link_libraries(${PROJECT_NAME} LIB_FRAME)
 target_link_libraries(${PROJECT_NAME} LIB_SPARK)
 target_link_libraries(${PROJECT_NAME} LIB_MY_CONFIG)
 target_link_libraries(${PROJECT_NAME} LIB_PROXY)
 target_link_libraries(${PROJECT_NAME} LIB_LOAD_BALANCE)
+target_link_libraries(${PROJECT_NAME} LIB_KMS)
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})

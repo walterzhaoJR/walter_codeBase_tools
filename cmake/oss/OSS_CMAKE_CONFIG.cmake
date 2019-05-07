@@ -1,4 +1,4 @@
-SET(PROJECT_NAME "oss_server")
+SET(PROJECT_NAME "../../bin/oss_server")
 
 SET(CMAKE_CXX_FLAGS "-std=c++0x")
 set(VERSION_INFO "'\"--KEEPER-V2.0R440D001MIG8.0\"'")# --KEEPER-V2.0R440D001MIG8.0
