@@ -41,24 +41,26 @@ include_directories(./
                     ${LIBEVENT_INC}
 )
 
-set(BOOST_ROOT ${BOOST_VERSION_1_58})
-find_package(Boost REQUIRED COMPONENTS
-regex
-program_options
-thread
-system
-)
+#强制使用静态库
 
-if(Boost_FOUND)
-    MESSAGE( STATUS "Boost_INCLUDE_DIRS = ${Boost_INCLUDE_DIRS}.")
-    MESSAGE( STATUS "Boost_LIBRARIES = ${Boost_LIBRARIES}.")
-    MESSAGE( STATUS "Boost_LIB_VERSION = ${Boost_LIB_VERSION}.")
-else(Boost_FOUND)
-    message("boost not found")
-endif()
+#SET (CMAKE_EXE_LINKER_FLAGS "-static")
 
-include_directories(${Boost_INCLUDE_DIRS})
+#set(Boost_USE_STATIC_LIBS   ON)
+#set(BOOST_ROOT ${BOOST_VERSION_1_58})
+#find_package(Boost REQUIRED COMPONENTS
+#regex
+#program_options
+#)
 
+#if(Boost_FOUND)
+#    MESSAGE( STATUS "Boost_INCLUDE_DIRS = ${Boost_INCLUDE_DIRS}.")
+#    MESSAGE( STATUS "Boost_LIBRARIES = ${Boost_LIBRARIES}.")
+#    MESSAGE( STATUS "Boost_LIB_VERSION = ${Boost_LIB_VERSION}.")
+#else(Boost_FOUND)
+#    message("boost not found")
+#endif()
+
+include_directories(${BOOST_1_53_INC})
 #configure_file( "./version_config.h.in"
 #                "./version_config.h"
 #)
@@ -74,58 +76,88 @@ add_subdirectory(kms)
 aux_source_directory(. SRC_DIR)
 add_executable(${PROJECT_NAME} ${SRC_DIR})
 
-find_library(LIB_JSON_PATH json_linux-gcc-4.4.6_libmt ${JSON_LIB})
+find_library(BOOST_SYSTEM_LIB libboost_system.a ${BOOST_1_53_LIB} NO_DEFAULT_PATH)
+message(${BOOST_SYSTEM_LIB})
+target_link_libraries(${PROJECT_NAME} ${BOOST_SYSTEM_LIB})
+
+find_library(BOOST_THREAD_LIB libboost_thread.a ${BOOST_1_53_LIB} NO_DEFAULT_PATH)
+message(${BOOST_THREAD_LIB})
+target_link_libraries(${PROJECT_NAME} ${BOOST_THREAD_LIB})
+
+find_library(BOOST_REGEX_LIB libboost_regex.a ${BOOST_1_53_LIB} NO_DEFAULT_PATH)
+message(${BOOST_REGEX_LIB})
+target_link_libraries(${PROJECT_NAME} ${BOOST_REGEX_LIB})
+
+find_library(BOOST_PROGRAM_OPTIONS_LIB libboost_program_options.a ${BOOST_1_53_LIB} NO_DEFAULT_PATH)
+message(${BOOST_PROGRAM_OPTIONS_LIB})
+target_link_libraries(${PROJECT_NAME} ${BOOST_PROGRAM_OPTIONS_LIB})
+
+find_library(LIB_JSON_PATH libjson_linux-gcc-4.4.6_libmt.a ${JSON_LIB})
+message(${LIB_JSON_PATH})
 target_link_libraries(${PROJECT_NAME} ${LIB_JSON_PATH})
 
-find_library(LIB_MPCOMM_PATH mpcomm ${COMM})
+find_library(LIB_MPCOMM_PATH libmpcomm.a ${COMM})
+message(${LIB_MPCOMM_PATH})
 target_link_libraries(${PROJECT_NAME} ${LIB_MPCOMM_PATH})
 
-find_library(LIB_PNG_PATH pngclient ${PNG_LIB})
+find_library(LIB_PNG_PATH libpngclient.a ${PNG_LIB})
+message(${LIB_PNG_PATH})
 target_link_libraries(${PROJECT_NAME} ${LIB_PNG_PATH})
 
-find_library(LIB_ZOOKEEPER_PATH zookeeper_mt ${ZOOKEEPER_LIB})
+find_library(LIB_ZOOKEEPER_PATH libzookeeper_mt.a ${ZOOKEEPER_LIB})
+message(${LIB_ZOOKEEPER_PATH})
 target_link_libraries(${PROJECT_NAME} ${LIB_ZOOKEEPER_PATH})
 
-find_library(LIB_ZKWATCH_PAYH commzookeeper ${ZKWATCH_LIB})
+find_library(LIB_ZKWATCH_PAYH libcommzookeeper.a ${ZKWATCH_LIB})
+message(${LIB_ZKWATCH_PAYH})
 target_link_libraries(${PROJECT_NAME} ${LIB_ZKWATCH_PAYH})
 
-find_library(LIB_WBL_PATH wbl ${WBL_LIB})
+find_library(LIB_WBL_PATH libwbl.a ${WBL_LIB})
+message(${LIB_WBL_PATH})
 target_link_libraries(${PROJECT_NAME} ${LIB_WBL_PATH})
 
-find_library(LIB_ICONV_PATH iconv ${PUBLICLIB})
+find_library(LIB_ICONV_PATH libiconv.a ${PUBLICLIB} NO_DEFAULT_PATH)
+message(${LIB_ICONV_PATH})
 target_link_libraries(${PROJECT_NAME} ${LIB_ICONV_PATH})
 
-find_library(LIB_EVENT_PATH event ${LIBEVENT_LIB})
+find_library(LIB_EVENT_PATH libevent.a ${LIBEVENT_LIB})
+message(${LIB_EVENT_PATH})
 target_link_libraries(${PROJECT_NAME} ${LIB_EVENT_PATH})
 
-find_library(LIB_SSL_PATH ssl ${SSL_LIB})
-message(${LIB_SSL_PATH})
-target_link_libraries(${PROJECT_NAME} ${LIB_SSL_PATH})
-
-find_library(LIB_SSL_CRYPTO_PATH crypto ${SSL_LIB})
-message(${LIB_SSL_CRYPTO_PATH})
-target_link_libraries(${PROJECT_NAME} ${LIB_SSL_CRYPTO_PATH})
-
-find_library(LIB_MYSQL_CLIENT_PATH mysqlclient ${MYSQL_LIB})
+find_library(LIB_MYSQL_CLIENT_PATH libmysqlclient.a ${MYSQL_LIB})
 message(${LIB_MYSQL_CLIENT_PATH})
 target_link_libraries(${PROJECT_NAME} ${LIB_MYSQL_CLIENT_PATH})
 
-find_library(LIB_DNS_PATH dnscli ${DNS_LIB})
+find_library(LIB_SSL_PATH libssl.a ${SSL_LIB})
+message(${LIB_SSL_PATH})
+target_link_libraries(${PROJECT_NAME} ${LIB_SSL_PATH})
+
+find_library(LIB_SSL_CRYPTO_PATH libcrypto.a ${SSL_LIB})
+message(${LIB_SSL_CRYPTO_PATH})
+target_link_libraries(${PROJECT_NAME} ${LIB_SSL_CRYPTO_PATH})
+
+find_library(LIB_DNS_PATH libdnscli.a ${DNS_LIB})
+message(${LIB_DNS_PATH})
 target_link_libraries(${PROJECT_NAME} ${LIB_DNS_PATH})
 
-find_library(LIB_NETSERVER_PATH netserver ${NETSERVER_LIB})
+find_library(LIB_NETSERVER_PATH libnetserver.a ${NETSERVER_LIB})
+message(${LIB_NETSERVER_PATH})
 target_link_libraries(${PROJECT_NAME} ${LIB_NETSERVER_PATH})
 
-find_library(QOS64_LIB qos_client64 ${PUBLICLIB}/cl5/libqos_client64-3.2.0)
+find_library(QOS64_LIB libqos_client64.a ${PUBLICLIB}/cl5/libqos_client64-3.2.0)
+message(${QOS64_LIB})
 target_link_libraries(${PROJECT_NAME} ${QOS64_LIB})
 
-find_library(CURL_LIB curl ${LIBARARY}/curl/curl-7.47.1/lib/libs)
+find_library(CURL_LIB libcurl.a ${LIBARARY_PATH}/curl/curl-7.47.1/lib/libs)
+message(${CURL_LIB})
 target_link_libraries(${PROJECT_NAME} ${CURL_LIB})
 
-find_library(NETAPI_LIB netapi ${PUBLICLIB}/netapi)
+find_library(NETAPI_LIB libnetapi.a ${PUBLICLIB}/netapi)
+message(${NETAPI_LIB})
 target_link_libraries(${PROJECT_NAME} ${NETAPI_LIB})
 
-find_library(PROTOBUF_LIB protobuf ${PUBLICLIB}/protobuf/protobuf-2.4.1_tlinux_64/prefix/lib)
+find_library(PROTOBUF_LIB libprotobuf.a ${PUBLICLIB}/protobuf/protobuf-2.4.1_tlinux_64/prefix/lib NO_DEFAULT_PATH)
+message(${PROTOBUF_LIB})
 target_link_libraries(${PROJECT_NAME} ${PROTOBUF_LIB})
 
 target_link_libraries(${PROJECT_NAME} pthread)
