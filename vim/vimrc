@@ -93,7 +93,7 @@ set expandtab
  
 "统一缩进为4
 set softtabstop=4
-set shiftwidth=4
+set shiftwidth=2
  
 "允许使用退格键，或set backspace=2
 set backspace=eol,start,indent
@@ -123,7 +123,7 @@ set guifontwide=新宋体:h11:cGB2312
 set enc=utf-8
 set fileencodings=ucs-bom,utf-8,chinese
 set langmenu=zh_CN.UTF-8
-language message zh_CN.UTF-8
+"language message zh_CN.UTF-8
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
  
