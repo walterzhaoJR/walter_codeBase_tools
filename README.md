@@ -3,3 +3,11 @@
 
 ## VIM
 * vimrc
+
+## cpp
+
+## design_pattern
+
+## makefile cmake
+
+## git
