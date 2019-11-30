@@ -1,8 +1,4 @@
 # walter_codeBase_tools
-* contains my codebase and some tools
-
-
-
 ###  [cmake](https://github.com/walterzhaoJR/walter_codeBase_tools/tree/master/cmake) 
 
 ### [cpp](https://github.com/walterzhaoJR/walter_codeBase_tools/tree/master/cpp) 
