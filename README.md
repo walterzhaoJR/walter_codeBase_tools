@@ -6,6 +6,10 @@
 
 ## cpp
 
+* thread
+* stl
+  * string
+
 ## design_pattern
 
 ## makefile cmake
