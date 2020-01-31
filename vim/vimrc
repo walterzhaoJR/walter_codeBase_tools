@@ -87,12 +87,12 @@ set smartindent
 set cindent
  
 "制表符为4
-set tabstop=4
+set tabstop=2
 set expandtab
 "%retab!
  
 "统一缩进为4
-set softtabstop=4
+set softtabstop=2
 set shiftwidth=2
  
 "允许使用退格键，或set backspace=2
@@ -117,28 +117,8 @@ set fencs=utf-8,usc-bom,euc-jp,gb18030,gbk,gb2312,cp936
  
 "设定字体
 set guifont=Courier_New:h11:cANSI
-set guifontwide=新宋体:h11:cGB2312
- 
-"设定编码
-set enc=utf-8
-set fileencodings=ucs-bom,utf-8,chinese
-set langmenu=zh_CN.UTF-8
-"language message zh_CN.UTF-8
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
- 
-"自动补全
-filetype plugin indent on
-set completeopt=longest,menu
- 
-"自动补全命令时候使用菜单式匹配列表
-set wildmenu
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType java set omnifunc=javacomplete#Complet
+set guifontwide=新宋体:h11:cGB23
 
-nmap <silent> <c-n> :NERDTreeToggle<CR>
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
