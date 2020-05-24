@@ -37,9 +37,6 @@ set nobackup
 set nowb
 set noswapfile
  
-"允许使用鼠标点击定位
-set mouse=a
- 
 "允许区域选择
 set selection=exclusive
 set selectmode=mouse,key
